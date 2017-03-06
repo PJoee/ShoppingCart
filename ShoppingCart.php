@@ -1,24 +1,6 @@
 <?php
-
   /**
-   * EXAMPLE
-   * $cart = new ShoppingCart();
-   * $add            = $cart->setItem(123,1);
-   * $addAtt         = $cart->setAttribute(2,"desc","kage");
-   * $addAtt         = $cart->setAttribute(2,"info","mere kage");
-   * $remove         = $cart->remove(3);
-   * $getItems       = $cart->getItems();
-   * $cart->clear();
-   * $cart->destroy();
-   * foreach ($getItems as $key => $value) {
-   *  echo 'id# ' . $key . ' quantity ' . $value . ' ';
-   *  echo $getAtt = $cart->getAttribute($key,'desc');
-   *  echo $getAtt = $cart->getAttribute($key,'info');
-   *  echo '<br>';
-   * }
-   *
-   *  still needs error reporting if item is not set and if not integer etc.
-   *  and much more
+   * Author Patrick Johansen
    */
   class ShoppingCart
   {
@@ -26,14 +8,12 @@
     private $sessionAttributes = '_attributes';
     private $items             = array();
     private $attributes        = array();
-
     public function __construct() {
       if (session_status() == PHP_SESSION_NONE) {
           session_start();
       }
       $this->read();
   	}
-
     /* GETTING */
     public function getItems()
     {
@@ -43,7 +23,6 @@
     {
       return $this->attributes[$id][$key];
     }
-
     /*
 	   * Sets item or update item with quantity
 	  */
@@ -67,7 +46,6 @@
         return TRUE;
       }
     }
-
     /*
 	   * Remove Specific item
 	  */
@@ -88,7 +66,6 @@
       unset($this->items);
       unset($this->attributes);
     }
-
     /*
 	   * Wipe out session
 	  */
@@ -98,13 +75,11 @@
   		$this->items = array();
   		$this->attributes = array();
   	}
-
     /* WHAT GETS THE JOB DONE */
     private function read()
     {
       $listItem       = $_SESSION[$this->sessionId];
       $listAttributes = $_SESSION[$this->sessionId . $this->sessionAttributes];
-
   		$items = explode(';', $listItem);
   		foreach($items as $item) {
         if (strpos($item, ',') !== FALSE) {
@@ -112,7 +87,6 @@
           $this->items[$id] = $qty;
         }
   		}
-
       $attributes = explode(';', $listAttributes);
       foreach($attributes as $attribute) {
         if (strpos($attribute, ',') !== FALSE) {
@@ -120,7 +94,6 @@
           $this->attributes[$id][$key] = $value;
         }
       }
-
     }
     private function write()
     {
@@ -128,21 +101,14 @@
   		foreach($this->items as $id => $qty) {
         $_SESSION[$this->sessionId] .= $id . ',' . $qty . ';';
   		}
-
       $_SESSION[$this->sessionId . $this->sessionAttributes] = '';
       foreach($this->attributes as $id => $attributes) {
         foreach ($attributes as $key => $value) {
           $_SESSION[$this->sessionId . $this->sessionAttributes] .= $id . ',' . $key . ',' . $value . ';';
         }
       }
-
       $_SESSION[$this->sessionId] = rtrim($_SESSION[$this->sessionId], ';');
       $_SESSION[$this->sessionId . $this->sessionAttributes] = rtrim($_SESSION[$this->sessionId . $this->sessionAttributes], ';');
-
     }
-
-
-  }// class end
-
-
+  }
  ?>
