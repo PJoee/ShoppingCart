@@ -32,11 +32,17 @@ $getItems       = $cart->getItems();
 // example of how to use it
 
 foreach ($getItems as $key => $value) {
+
   echo 'id# ' . $key . ' quantity ' . $value . ' ';
+  
   echo $getAtt = $cart->getAttribute($key,'desc');
+  
   echo $getAtt = $cart->getAttribute($key,'info');
+  
   echo '<br>';
+  
 }
+
 
 still needs error reporting if item is not set and if not integer etc.
 and much more
