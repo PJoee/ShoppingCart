@@ -39,8 +39,6 @@ foreach ($getItems as $key => $value) {
   
   echo $getAtt = $cart->getAttribute($key,'info');
   
-  echo '<br>';
-  
 }
 
 
