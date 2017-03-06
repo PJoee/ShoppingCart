@@ -1,6 +1,6 @@
 <?php
   /**
-   * Author Patrick Johansen
+   * 
    */
   class ShoppingCart
   {
