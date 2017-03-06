@@ -5,6 +5,7 @@ EXAMPLE
 $cart = new ShoppingCart();
 
 // this both sets and updates the current item, first integer is the itemId second is the quantity
+
 $add            = $cart->setItem(123,1);
 
 // this adds and attribute example desc or info, first integer is the itemId
