@@ -3,6 +3,7 @@ ShoppingCart
 
 EXAMPLE
 $cart = new ShoppingCart();
+
 // this both sets and updates the current item, first integer is the itemId second is the quantity
 $add            = $cart->setItem(123,1);
 
